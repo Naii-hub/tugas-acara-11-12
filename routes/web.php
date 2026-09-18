@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\LaporanPenjualanController;
 
 Route::get('/greeting', function () {
     return view('greeting', ['name' => 'Naila']);
@@ -22,10 +24,12 @@ Route::get('/', function () {
     ]);
 });
 
-// Rute dengan Parameter Wajib
-Route::get('/produk/{id}', function ($id) {
-    return 'Menampilkan data produk dengan ID: ' . $id;
-});
+// Routing menuju Controller Produk
+Route::get('/produk', [ProdukController::class, 'index']);
+Route::get('/produk/{id}', [ProdukController::class, 'show']);
+
+// Route menuju Single Action Controller Laporan Penjualan
+Route::get('/laporan', LaporanPenjualanController::class);
 
 // Rute dengan Parameter Opsional
 Route::get('/produk/cari/{nama?}', function ($nama = null) {
